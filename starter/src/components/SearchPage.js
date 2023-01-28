@@ -3,28 +3,40 @@ import Book from "./Book";
 import * as BooksAPI from "../BooksAPI";
 import { useState } from "react";
 
-const SearchPage = () => {
+const SearchPage = ({ handleUpdateBook, books }) => {
   const onType = (input) => {
     setQuery(input);
 
     if (input === "") {
-      setBooks([]);
+      setQueryBooks([]);
       return;
     }
+
+    const combineBooks = (searchResults) => {
+      books.forEach((book) => {
+        searchResults.forEach(
+          (queryBook) =>
+            book.id === queryBook.id && (queryBook.shelf = book.shelf)
+        );
+      });
+
+      return searchResults;
+    };
+
     const searchBooks = async () => {
-      const res = await BooksAPI.search(input, 30);
+      const res = await BooksAPI.search(input);
       console.log(res);
       if (res.error === undefined) {
-        setBooks(res);
+        setQueryBooks(combineBooks(res));
       } else {
-        setBooks([]);
+        setQueryBooks([]);
       }
     };
 
     searchBooks();
   };
 
-  const [books, setBooks] = useState([]);
+  const [queryBooks, setQueryBooks] = useState([]);
   const [query, setQuery] = useState("");
 
   return (
@@ -47,13 +59,14 @@ const SearchPage = () => {
           {books === undefined ? (
             <></>
           ) : (
-            books.map((book) => (
+            queryBooks.map((book) => (
               <Book
                 key={book.id}
                 backgroundImage={book.imageLinks}
                 title={book.title}
                 authors={book.authors}
                 shelf={book.shelf}
+                onUpdateBook={handleUpdateBook}
                 id={book.id}
               />
             ))

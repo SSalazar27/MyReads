@@ -2,42 +2,8 @@ import CurrentlyReading from "./CurrentlyReading";
 import Read from "./Read";
 import WantToRead from "./WantToRead";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import * as BooksAPI from "../BooksAPI";
 
-const BookList = () => {
-  useEffect(() => {
-    const getBooks = async () => {
-      const res = await BooksAPI.getAll();
-      console.log(res);
-      setBooks(res);
-    };
-    getBooks();
-  }, []);
-
-  const handleUpdateBook = async (id, shelf) => {
-    const getBook = async () => {
-      const res = await BooksAPI.get(id);
-      return res;
-    };
-    const temp = await getBook();
-    const updateBook = async () => {
-      await BooksAPI.update(temp, shelf);
-    };
-
-    const index = books.findIndex((book) => book.id === id);
-
-    books.splice(index, 1);
-
-    updateBook();
-
-    temp.shelf = shelf;
-
-    setBooks([...books, temp]);
-  };
-
-  const [books, setBooks] = useState([]);
-
+const BookList = ({ books, handleUpdateBook }) => {
   return (
     <div className="list-books">
       <div className="list-books-title">

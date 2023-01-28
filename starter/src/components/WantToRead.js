@@ -10,7 +10,7 @@ const WantToRead = ({ books, onUpdateBook }) => {
             .map((book) => (
               <Book
                 key={book.id}
-                backgroundImage={book.imageLinks.thumbnail}
+                backgroundImage={book.imageLinks}
                 title={book.title}
                 authors={book.authors}
                 shelf={book.shelf}

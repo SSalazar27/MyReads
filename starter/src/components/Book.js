@@ -19,10 +19,10 @@ const Book = ({ backgroundImage, title, authors, shelf, onUpdateBook, id }) => {
           ></div>
           <div className="book-shelf-changer">
             <select
-              defaultValue={shelf}
+              defaultValue={shelf !== undefined ? shelf : "none"}
               onChange={(event) => onUpdateBook(id, event.target.value)}
             >
-              <option value="none" disabled>
+              <option value="disabled" disabled>
                 Move to...
               </option>
               <option value="currentlyReading">Currently Reading</option>
