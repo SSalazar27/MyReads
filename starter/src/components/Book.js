@@ -1,5 +1,3 @@
-import { toContainElement } from "@testing-library/jest-dom/dist/matchers";
-
 const Book = ({ backgroundImage, title, authors, shelf, onUpdateBook, id }) => {
   if (authors === undefined) {
     authors = [];
@@ -11,7 +9,11 @@ const Book = ({ backgroundImage, title, authors, shelf, onUpdateBook, id }) => {
     <li>
       <div className="book">
         <div className="book-top">
-          <img className="book-cover" src={backgroundImage.thumbnail}></img>
+          <img
+            className="book-cover"
+            src={backgroundImage.thumbnail}
+            alt={"Book Cover"}
+          ></img>
           <div className="book-shelf-changer">
             <select
               defaultValue={shelf !== undefined ? shelf : "none"}

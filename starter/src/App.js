@@ -9,6 +9,7 @@ function App() {
   useEffect(() => {
     const getBooks = async () => {
       const res = await BooksAPI.getAll();
+      console.log(res);
       setBooks(res);
     };
     getBooks();
@@ -26,11 +27,15 @@ function App() {
 
     const index = books.findIndex((book) => book.id === id);
 
-    books.splice(index, 1);
+    if (index !== -1) {
+      books.splice(index, 1);
+    }
 
     updateBook();
 
     temp.shelf = shelf;
+
+    console.log([...books, temp]);
 
     setBooks([...books, temp]);
   };

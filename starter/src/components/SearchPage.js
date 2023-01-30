@@ -25,6 +25,7 @@ const SearchPage = ({ handleUpdateBook, books }) => {
 
     const searchBooks = async () => {
       const res = await BooksAPI.search(input);
+      console.log(res);
       if (res.error === undefined) {
         setQueryBooks(combineBooks(res));
       } else {
