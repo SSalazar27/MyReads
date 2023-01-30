@@ -9,7 +9,6 @@ function App() {
   useEffect(() => {
     const getBooks = async () => {
       const res = await BooksAPI.getAll();
-      console.log(res);
       setBooks(res);
     };
     getBooks();
@@ -34,8 +33,6 @@ function App() {
     updateBook();
 
     temp.shelf = shelf;
-
-    console.log([...books, temp]);
 
     setBooks([...books, temp]);
   };
