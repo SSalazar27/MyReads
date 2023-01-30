@@ -1,6 +1,4 @@
-import CurrentlyReading from "./CurrentlyReading";
-import Read from "./Read";
-import WantToRead from "./WantToRead";
+import Shelf from "./Shelf";
 import { Link } from "react-router-dom";
 
 const BookList = ({ books, handleUpdateBook }) => {
@@ -11,9 +9,17 @@ const BookList = ({ books, handleUpdateBook }) => {
       </div>
       <div className="list-books-content">
         <div>
-          <CurrentlyReading books={books} onUpdateBook={handleUpdateBook} />
-          <WantToRead books={books} onUpdateBook={handleUpdateBook} />
-          <Read books={books} onUpdateBook={handleUpdateBook} />
+          <Shelf
+            title="Currently Reading"
+            books={books}
+            onUpdateBook={handleUpdateBook}
+          />
+          <Shelf
+            title="Want to Read"
+            books={books}
+            onUpdateBook={handleUpdateBook}
+          />
+          <Shelf title="Read" books={books} onUpdateBook={handleUpdateBook} />
         </div>
       </div>
 
